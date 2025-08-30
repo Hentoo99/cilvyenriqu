@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 anni insieme ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: #f8e8ee;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Sfondo con polaroid */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("{{ url_for('static', filename='bg1.jpg') }}"), 
+                        url("{{ url_for('static', filename='bg2.jpg') }}"), 
+                        url("{{ url_for('static', filename='bg3.jpg') }}");
+      background-size: 300px, 250px, 280px;
+      background-repeat: no-repeat;
+      background-position: 10% 20%, 70% 40%, 30% 80%;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    header {
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 3em;
+      margin: 0;
+      color: #d6336c;
+    }
+    h2 {
+      font-weight: normal;
+      margin-top: 10px;
+    }
+    .hearts {
+      font-size: 2em;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: #fff;
+    }
+    .carousel img {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
+      display: none;
+    }
+    .carousel img.active {
+      display: block;
+    }
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(214, 51, 108, 0.7);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 1.5em;
+      border-radius: 50%;
+    }
+    .carousel button:hover {
+      background: rgba(166, 30, 77, 0.9);
+    }
+    .carousel .prev { left: 10px; }
+    .carousel .next { right: 10px; }
+
+    /* Stile polaroid */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 40px 20px;
+    }
+    .polaroid {
+      background: #fff;
+      padding: 10px 10px 25px;
+      width: 220px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transform: rotate(-2deg);
+      transition: transform 0.3s;
+      border: 1px solid #ddd;
+    }
+    .polaroid:nth-child(even) {
+      transform: rotate(2deg);
+    }
+    .polaroid img {
+      width: 100%;
+      display: block;
+    }
+    .caption {
+      margin-top: 8px;
+      font-size: 0.9em;
+      color: #555;
+      font-style: italic;
+    }
+    .polaroid:hover {
+      transform: scale(1.05) rotate(0deg);
+    }
+
+    .message {
+      font-size: 1.3em;
+      padding: 30px 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    button {
+      background: #d6336c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #a61e4d;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 0.9em;
+      background: rgba(214,51,108,0.1);
+      margin-top: 40px;
+    }
+
+    /* Cuoricini che scendono */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      color: red;
+      animation: fall 6s linear infinite;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💖 7 anni insieme 💖</h1>
+    <h2>Ogni ricordo è una polaroid del nostro amore</h2>
+    <div class="hearts">❤️❤️❤️</div>
+  </header>
+
+  <!-- Carousel -->
+  <section class="carousel">
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
+    <img src="{{ url_for('static', filename='foto3o.jpg') }}" alt="Noi 1" class="active">
+    <img src="{{ url_for('static', filename='foto4o.jpeg') }}" alt="Noi 2">
+    <img src="{{ url_for('static', filename='foto7o.jpeg') }}" alt="Noi 3">
+    <img src="{{ url_for('static', filename='foto8v.jpeg') }}" alt="Noi 4">
+  </section>
+
+  <!-- Galleria Polaroid -->
+  <section class="gallery">
+    <div class="polaroid">
+      <img src="{{ url_for('static', filename='foto6v.jpeg') }}" alt="Noi 1">
+      <div class="caption">09/08/24</div>
+    </div>
+    <div class="polaroid">
+      <img src="{{ url_for('static', filename='foto1v.jpeg') }}" alt="Noi 2">
+      <div class="caption">26/05/24</div>
+    </div>
+    <div class="polaroid">
+      <img src="{{ url_for('static', filename='foto5v.jpeg') }}" alt="Noi 3">
+      <div class="caption">25/12/23</div>
+    </div>
+  </section>
+
+  <section class="message">
+    <p>Sette anni, e ancora mi sembra il primo giorno.
+Ogni momento con te è un piccolo scatto d’amore, una polaroid che conservo gelosamente nell’album della mia vita.</p>
+    <button onclick="showSurprise()">Clicca qui 💌</button>
+  </section>
+
+  <footer>
+    Con tutto il mio amore ❤️
+  </footer>
+
+  <script>
+    // Carousel
+    const images = document.querySelectorAll('.carousel img');
+    let current = 0;
+    document.querySelector('.next').addEventListener('click', () => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    });
+    document.querySelector('.prev').addEventListener('click', () => {
+      images[current].classList.remove('active');
+      current = (current - 1 + images.length) % images.length;
+      images[current].classList.add('active');
+    });
+
+    // Cuoricini che cadono
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 700);
+
+    // Messaggio a sorpresa
+    function showSurprise() {
+      alert("Ti amo più di ieri e meno di domani 💖");
+    }
+  </script>
+</body>
+</html>
